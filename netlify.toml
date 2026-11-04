@@ -1,0 +1,18 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  environment = { NODE_VERSION = "22", NETLIFY_NEXT_PLUGIN_SKIP = "true" }
+
+[functions]
+  directory = "netlify/functions"
+
+[[plugins]]
+  package = "netlify-plugin-a11y"
+  [plugins.inputs]
+    checkPaths = []
+    resultMode = "warn"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
