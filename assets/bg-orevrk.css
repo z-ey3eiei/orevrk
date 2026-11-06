@@ -1,0 +1,161 @@
+/**
+ * platform.orevrk.cloud — dark grid + cyan/indigo glow + running light streaks (no yellow/amber).
+ */
+html {
+  background: #000;
+}
+
+body {
+  margin: 0;
+  position: relative;
+  min-height: 100vh;
+  background: #000;
+}
+
+#orevrk-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  background: transparent;
+}
+
+.dark body {
+  background: transparent;
+}
+
+.orevrk-bg__base {
+  position: absolute;
+  inset: 0;
+  background: #000;
+}
+
+/* Fine line grid (reference image style, grey on black) */
+.orevrk-bg__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: center top;
+}
+
+/* Soft ambient glows — cyan bottom + subtle indigo (no warm tones) */
+.orevrk-bg__glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 85% 55% at 50% 105%,
+      rgba(34, 211, 238, 0.14) 0%,
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 50% 42% at 75% 12%,
+      rgba(99, 102, 241, 0.09) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 45% 35% at 15% 20%,
+      rgba(56, 189, 248, 0.05) 0%,
+      transparent 50%
+    );
+}
+
+/* Horizontal light sweep (runs forever) */
+.orevrk-bg__sweep-h {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    transparent 42%,
+    rgba(34, 211, 238, 0.07) 48%,
+    rgba(165, 243, 252, 0.12) 50%,
+    rgba(34, 211, 238, 0.07) 52%,
+    transparent 58%,
+    transparent 100%
+  );
+  background-size: 200% 200%;
+  animation: orevrk-sweep-h 14s linear infinite;
+  opacity: 0.85;
+}
+
+/* Vertical light sweep (offset timing) */
+.orevrk-bg__sweep-v {
+  position: absolute;
+  inset: -20%;
+  background: linear-gradient(
+    -15deg,
+    transparent 35%,
+    rgba(99, 102, 241, 0.06) 49.2%,
+    rgba(129, 140, 248, 0.1) 50%,
+    rgba(99, 102, 241, 0.06) 50.8%,
+    transparent 66%
+  );
+  background-size: 180% 180%;
+  animation: orevrk-sweep-v 22s linear infinite;
+  opacity: 0.65;
+}
+
+/* Moving "packets" along grid rows */
+.orevrk-bg__pulse-rows {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 47px,
+    rgba(34, 211, 238, 0.03) 48px,
+    rgba(34, 211, 238, 0.055) 48.5px,
+    rgba(34, 211, 238, 0.03) 49px,
+    transparent 50px
+  );
+  animation: orevrk-grid-drift 12s linear infinite;
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse 90% 75% at 50% 45%, #000 20%, transparent 72%);
+}
+
+@keyframes orevrk-sweep-h {
+  0% {
+    background-position: -100% 30%;
+  }
+  100% {
+    background-position: 200% 70%;
+  }
+}
+
+@keyframes orevrk-sweep-v {
+  0% {
+    background-position: 80% -80%;
+  }
+  100% {
+    background-position: -80% 120%;
+  }
+}
+
+@keyframes orevrk-grid-drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(48px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orevrk-bg__sweep-h,
+  .orevrk-bg__sweep-v,
+  .orevrk-bg__pulse-rows {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
