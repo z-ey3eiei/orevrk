@@ -1,0 +1,10 @@
+{
+  "name": "orevrk-cloud",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler pages deploy . --project-name=orevrk-cloud"
+  },
+  "devDependencies": {
+    "wrangler": "^4.49.0"
+  }
+}
