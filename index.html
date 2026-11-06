@@ -9,6 +9,13 @@
       name="description"
       content="Deploy server-rendered pages, APIs, and web workloads on managed compute. Combine instant static shells with dynamic data streams via Partial Prerendering."
     />
+    <script>
+      (function () {
+        if (location.hash === "#build") {
+          location.replace(location.pathname.replace(/\/$/, "") + "/build.html" + location.search);
+        }
+      })();
+    </script>
     <script type="module" crossorigin src="/assets/index-sxJvwYor.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-xsKohsPy.css">
   </head>

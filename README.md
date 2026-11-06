@@ -22,6 +22,12 @@ In [Cloudflare Dashboard](https://dash.cloudflare.com/) → **Workers & Pages** 
 - `GET /api/hello` — JSON greeting
 - `GET /api/health` — health check
 
+## Pages
+
+- **Landing:** `/` (`index.html`) — full marketing page; the old hash `/#build` redirects to `/build.html`.
+- **Build only:** `/build.html` — same React bundle, but only the “Build your app” section (framework commands + subscribe).
+- Netlify redirects `/build` → `/build.html` (see `netlify.toml`). For Cloudflare Workers, add a similar route or static `build.html`.
+
 ---
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/fe6e4a93-3ddf-49b5-8eb0-5fb8b22fe974/deploy-status)](https://app.netlify.com/projects/orevrk/deploys)
