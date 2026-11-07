@@ -1,0 +1,929 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Templates — orevrk.cloud</title>
+    <meta
+      name="description"
+      content="Browse production-ready Vercel templates and deploy them on orevrk or DevStack. Clone the source, or ship it in one click."
+    />
+    <meta name="theme-color" content="#09090b" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #09090b;
+        --surface: #0c0c10;
+        --surface-2: #0b0b0f;
+        --border: rgba(255, 255, 255, 0.1);
+        --border-strong: rgba(255, 255, 255, 0.18);
+        --text: #fafafa;
+        --muted: #a1a1aa;
+        --faint: #71717a;
+        --brand: #625fff;
+        --brand-soft: rgba(98, 95, 255, 0.14);
+        --green: #00bb7f;
+        --amber: #f99c00;
+        --radius-sm: 6px;
+        --radius: 8px;
+        --radius-lg: 1rem;
+        --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+        --font-mono: "Geist Mono", ui-monospace, "JetBrains Mono", monospace;
+      }
+
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font-sans);
+        font-size: 16px;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background:
+          radial-gradient(60rem 32rem at 50% -12rem, rgba(98, 95, 255, 0.16), transparent 70%),
+          radial-gradient(40rem 24rem at 88% 4rem, rgba(0, 187, 127, 0.07), transparent 70%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+        color: inherit;
+        cursor: pointer;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--brand);
+        outline-offset: 2px;
+        border-radius: var(--radius-sm);
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .wrap {
+        width: 100%;
+        max-width: 76rem;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ---------- header ---------- */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        border-bottom: 1px solid var(--border);
+        background: rgba(9, 9, 11, 0.72);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .site-header .wrap {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        height: 3.75rem;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        flex-shrink: 0;
+      }
+
+      .brand-mark {
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: var(--radius-sm);
+        background: linear-gradient(140deg, var(--brand), #8b5cf6 55%, var(--green));
+        display: grid;
+        place-items: center;
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+      }
+
+      .brand-mark::after {
+        content: "";
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 2px;
+        background: #09090b;
+      }
+
+      .brand-name {
+        font-size: 0.9375rem;
+      }
+
+      .brand-name span {
+        color: var(--faint);
+        font-weight: 400;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        margin-left: auto;
+      }
+
+      .nav a {
+        padding: 0.375rem 0.625rem;
+        border-radius: var(--radius-sm);
+        font-size: 0.875rem;
+        color: var(--muted);
+        transition: color 0.15s ease, background-color 0.15s ease;
+      }
+
+      .nav a:hover {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .nav a[aria-current="page"] {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.07);
+      }
+
+      .header-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.4375rem 0.75rem;
+        border-radius: var(--radius-sm);
+        background: var(--text);
+        color: #09090b;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        white-space: nowrap;
+        transition: opacity 0.15s ease;
+      }
+
+      .header-cta:hover {
+        opacity: 0.88;
+      }
+
+      /* ---------- hero ---------- */
+      .hero {
+        padding: 4.5rem 0 2.5rem;
+        text-align: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.25rem 0.625rem 0.25rem 0.375rem;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.03);
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .eyebrow .dot {
+        width: 0.375rem;
+        height: 0.375rem;
+        border-radius: 999px;
+        background: var(--green);
+        box-shadow: 0 0 0 3px rgba(0, 187, 127, 0.16);
+      }
+
+      .hero h1 {
+        margin: 1.25rem auto 0;
+        max-width: 44rem;
+        font-size: clamp(2rem, 5vw, 3.25rem);
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        font-weight: 700;
+      }
+
+      .hero h1 em {
+        font-style: normal;
+        background: linear-gradient(100deg, var(--brand), #a78bfa 60%, var(--green));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .hero p {
+        margin: 1rem auto 0;
+        max-width: 38rem;
+        color: var(--muted);
+        font-size: 1.0625rem;
+        line-height: 1.6;
+      }
+
+      .stats {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem 1.75rem;
+        margin: 2rem 0 0;
+        padding: 0;
+        list-style: none;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--faint);
+      }
+
+      .stats b {
+        color: var(--text);
+        font-weight: 500;
+      }
+
+      /* ---------- toolbar ---------- */
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 0;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 2rem;
+      }
+
+      .search {
+        position: relative;
+        flex: 1 1 16rem;
+        min-width: 0;
+      }
+
+      .search svg {
+        position: absolute;
+        left: 0.6875rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--faint);
+        pointer-events: none;
+      }
+
+      .search input {
+        width: 100%;
+        padding: 0.5rem 0.75rem 0.5rem 2.125rem;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--surface-2);
+        color: var(--text);
+        font-size: 0.875rem;
+        transition: border-color 0.15s ease, background-color 0.15s ease;
+      }
+
+      .search input::placeholder {
+        color: var(--faint);
+      }
+
+      .search input:hover {
+        border-color: var(--border-strong);
+      }
+
+      .search input:focus {
+        outline: none;
+        border-color: var(--brand);
+        background: var(--surface);
+        box-shadow: 0 0 0 3px var(--brand-soft);
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.375rem;
+      }
+
+      .chip {
+        padding: 0.375rem 0.6875rem;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: transparent;
+        color: var(--muted);
+        font-size: 0.8125rem;
+        transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+      }
+
+      .chip:hover {
+        color: var(--text);
+        border-color: var(--border-strong);
+      }
+
+      .chip[aria-pressed="true"] {
+        color: var(--text);
+        border-color: rgba(98, 95, 255, 0.5);
+        background: var(--brand-soft);
+      }
+
+      .sort {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        margin-left: auto;
+        font-size: 0.8125rem;
+        color: var(--faint);
+      }
+
+      .sort select {
+        padding: 0.375rem 0.5rem;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: var(--surface-2);
+        color: var(--text);
+        font: inherit;
+        font-size: 0.8125rem;
+      }
+
+      /* ---------- grid ---------- */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+        gap: 1rem;
+        padding-bottom: 4rem;
+      }
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1.125rem;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        background: linear-gradient(180deg, var(--surface), var(--surface-2));
+        transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .card:hover {
+        border-color: rgba(98, 95, 255, 0.42);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px -18px rgba(98, 95, 255, 0.6);
+      }
+
+      .card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+      }
+
+      .fw {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .fw i {
+        width: 0.4375rem;
+        height: 0.4375rem;
+        border-radius: 999px;
+        background: var(--fw-color, var(--muted));
+      }
+
+      .stars {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        color: var(--faint);
+      }
+
+      .stars svg {
+        color: var(--amber);
+      }
+
+      .card h2 {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.875rem;
+        line-height: 1.55;
+        flex: 1;
+      }
+
+      .card-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding-top: 0.25rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.375rem;
+        padding: 0.4375rem 0.75rem;
+        border-radius: var(--radius-sm);
+        border: 1px solid transparent;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        white-space: nowrap;
+        transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+      }
+
+      .btn-primary {
+        background: var(--brand);
+        color: #fff;
+      }
+
+      .btn-primary:hover {
+        background: #524fe6;
+      }
+
+      .btn-ghost {
+        border-color: var(--border);
+        background: transparent;
+        color: var(--muted);
+      }
+
+      .btn-ghost:hover {
+        color: var(--text);
+        border-color: var(--border-strong);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .btn-ghost[data-copied="true"] {
+        color: var(--green);
+        border-color: rgba(0, 187, 127, 0.45);
+      }
+
+      .icon-link {
+        display: inline-grid;
+        place-items: center;
+        width: 1.875rem;
+        height: 1.875rem;
+        margin-left: auto;
+        border-radius: var(--radius-sm);
+        color: var(--faint);
+        transition: color 0.15s ease, background-color 0.15s ease;
+      }
+
+      .icon-link:hover {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .empty {
+        padding: 4rem 1rem 6rem;
+        text-align: center;
+        color: var(--muted);
+      }
+
+      .empty strong {
+        display: block;
+        color: var(--text);
+        margin-bottom: 0.375rem;
+      }
+
+      /* ---------- footer ---------- */
+      .site-footer {
+        border-top: 1px solid var(--border);
+        padding: 2rem 0 3rem;
+      }
+
+      .site-footer .wrap {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem 1.5rem;
+        font-size: 0.8125rem;
+        color: var(--faint);
+      }
+
+      .site-footer a:hover {
+        color: var(--text);
+      }
+
+      .site-footer .spacer {
+        margin-left: auto;
+      }
+
+      @media (max-width: 640px) {
+        .hero {
+          padding: 3rem 0 2rem;
+        }
+        .nav {
+          display: none;
+        }
+        .stats {
+          display: grid;
+          grid-template-columns: repeat(2, auto);
+          justify-content: center;
+          gap: 0.5rem 1.5rem;
+        }
+        .sort {
+          margin-left: 0;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+        }
+        .card:hover {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">orevrk<span>.cloud</span></span>
+        </a>
+        <nav class="nav" aria-label="Main">
+          <a href="/">Overview</a>
+          <a href="/templates" aria-current="page">Templates</a>
+          <a href="https://devstack.bid/templates">DevStack</a>
+        </nav>
+        <a class="header-cta" href="https://devstack.bid/deploy">
+          Deploy
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="wrap">
+          <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Template gallery</p>
+          <h1>Start from a template.<br /><em>Ship on compute you control.</em></h1>
+          <p>
+            Production-ready templates from Vercel and the wider ecosystem. Clone the source, or
+            deploy it straight to DevStack — no vendor lock-in, no rewrites.
+          </p>
+          <ul class="stats">
+            <li><b id="stat-count">12</b> templates</li>
+            <li><b id="stat-fw">4</b> frameworks</li>
+            <li><b>MIT</b> licensed</li>
+            <li><b>0</b> lock-in</li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="wrap">
+        <div class="toolbar">
+          <div class="search">
+            <label class="sr-only" for="q">Search templates</label>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5" />
+              <path d="M10.5 10.5 14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+            <input id="q" type="search" placeholder="Search templates, frameworks, use cases…" autocomplete="off" />
+          </div>
+
+          <div class="chips" role="group" aria-label="Filter by framework">
+            <button class="chip" type="button" data-fw="all" aria-pressed="true">All</button>
+            <button class="chip" type="button" data-fw="Next.js" aria-pressed="false">Next.js</button>
+            <button class="chip" type="button" data-fw="Astro" aria-pressed="false">Astro</button>
+            <button class="chip" type="button" data-fw="SvelteKit" aria-pressed="false">SvelteKit</button>
+            <button class="chip" type="button" data-fw="Nuxt" aria-pressed="false">Nuxt</button>
+          </div>
+
+          <div class="sort">
+            <label for="sort">Sort</label>
+            <select id="sort">
+              <option value="stars">Most stars</option>
+              <option value="name">Name A–Z</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid" id="grid"></div>
+        <p class="empty" id="empty" hidden>
+          <strong>No templates match that search.</strong>
+          Try a different keyword or clear the framework filter.
+        </p>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <span>orevrk.cloud — deploy web apps on compute you control.</span>
+        <a class="spacer" href="https://devstack.bid">DevStack</a>
+        <a href="https://vercel.com/templates">Vercel templates</a>
+        <a href="https://github.com/z-ey3eiei/orevrk">GitHub</a>
+      </div>
+    </footer>
+
+    <p class="sr-only" role="status" aria-live="polite" id="live"></p>
+
+    <script>
+      const TEMPLATES = [
+        {
+          name: "AI Chatbot",
+          repo: "vercel/chatbot",
+          framework: "Next.js",
+          stars: 21038,
+          description:
+            "Full-featured, hackable AI chatbot with streaming responses, tool calls, and generative UI.",
+        },
+        {
+          name: "Next.js Commerce",
+          repo: "vercel/commerce",
+          framework: "Next.js",
+          stars: 14312,
+          description:
+            "Production storefront with cart, checkout, and a pluggable commerce backend.",
+        },
+        {
+          name: "Subscription Payments",
+          repo: "vercel/nextjs-subscription-payments",
+          framework: "Next.js",
+          stars: 7708,
+          description:
+            "SaaS starter with Stripe subscriptions, authentication, and Postgres row-level security.",
+        },
+        {
+          name: "Platforms Starter Kit",
+          repo: "vercel/platforms",
+          framework: "Next.js",
+          stars: 6724,
+          description:
+            "Multi-tenant app with custom subdomains, team invites, and per-tenant routing.",
+        },
+        {
+          name: "Vercel Examples",
+          repo: "vercel/examples",
+          framework: "Next.js",
+          stars: 5161,
+          description:
+            "Curated solutions and integrations maintained by Vercel, from auth to edge caching.",
+        },
+        {
+          name: "Next.js Learn",
+          repo: "vercel/next-learn",
+          framework: "Next.js",
+          stars: 4797,
+          description:
+            "The starter used throughout the official Next.js course, with dashboard and auth chapters.",
+        },
+        {
+          name: "Admin Dashboard",
+          repo: "vercel/nextjs-postgres-nextauth-tailwindcss-template",
+          framework: "Next.js",
+          stars: 1623,
+          description:
+            "Admin dashboard wired with NextAuth, Postgres, and Tailwind CSS out of the box.",
+        },
+        {
+          name: "Next.js Postgres Auth",
+          repo: "vercel/nextjs-postgres-auth-starter",
+          framework: "Next.js",
+          stars: 1054,
+          description:
+            "Next.js, Drizzle ORM, NextAuth, and Postgres connected end to end with migrations.",
+        },
+        {
+          name: "Portfolio Starter",
+          repo: "vercel/nextjs-portfolio-starter",
+          framework: "Next.js",
+          stars: 729,
+          description:
+            "Markdown-driven portfolio site with MDX content, syntax highlighting, and RSS.",
+        },
+        {
+          name: "Astro",
+          repo: "withastro/astro",
+          framework: "Astro",
+          stars: 63796,
+          description:
+            "Content-first framework that ships zero JavaScript by default and hydrates islands on demand.",
+        },
+        {
+          name: "Nuxt",
+          repo: "nuxt/nuxt",
+          framework: "Nuxt",
+          stars: 61048,
+          description:
+            "Vue framework with auto-imports, file-based routing, and server routes built in.",
+        },
+        {
+          name: "SvelteKit",
+          repo: "sveltejs/kit",
+          framework: "SvelteKit",
+          stars: 20903,
+          description:
+            "Svelte framework with file-based routing, SSR, and adapters for any host.",
+        },
+      ];
+
+      const FW_COLORS = {
+        "Next.js": "#ffffff",
+        Astro: "#ff5d01",
+        SvelteKit: "#ff3e00",
+        Nuxt: "#00dc82",
+      };
+
+      const state = { q: "", fw: "all", sort: "stars" };
+
+      const grid = document.getElementById("grid");
+      const empty = document.getElementById("empty");
+      const live = document.getElementById("live");
+      const searchInput = document.getElementById("q");
+      const sortSelect = document.getElementById("sort");
+      const chips = Array.from(document.querySelectorAll(".chip"));
+
+      const starIcon =
+        '<svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5l1.9 4.1 4.5.6-3.3 3.1.8 4.4L8 11.6l-3.9 2.1.8-4.4L1.6 6.2l4.5-.6L8 1.5z"/></svg>';
+      const githubIcon =
+        '<svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 012-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>';
+
+      function formatStars(n) {
+        return n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, "") + "k" : String(n);
+      }
+
+      function deployUrl(t) {
+        const params = new URLSearchParams({
+          template: t.repo.split("/")[1],
+          repo: "https://github.com/" + t.repo,
+        });
+        return "https://devstack.bid/deploy?" + params.toString();
+      }
+
+      function visible() {
+        const q = state.q.trim().toLowerCase();
+        let list = TEMPLATES.filter((t) => {
+          const fwOk = state.fw === "all" || t.framework === state.fw;
+          if (!fwOk) return false;
+          if (!q) return true;
+          return (
+            t.name.toLowerCase().includes(q) ||
+            t.repo.toLowerCase().includes(q) ||
+            t.framework.toLowerCase().includes(q) ||
+            t.description.toLowerCase().includes(q)
+          );
+        });
+        list = list.slice().sort((a, b) =>
+          state.sort === "name" ? a.name.localeCompare(b.name) : b.stars - a.stars
+        );
+        return list;
+      }
+
+      function card(t) {
+        const el = document.createElement("article");
+        el.className = "card";
+
+        const top = document.createElement("div");
+        top.className = "card-top";
+
+        const fw = document.createElement("span");
+        fw.className = "fw";
+        fw.style.setProperty("--fw-color", FW_COLORS[t.framework] || "#a1a1aa");
+        fw.innerHTML = '<i aria-hidden="true"></i>';
+        fw.append(document.createTextNode(t.framework));
+
+        const stars = document.createElement("span");
+        stars.className = "stars";
+        stars.setAttribute("aria-label", t.stars.toLocaleString("en-US") + " GitHub stars");
+        stars.innerHTML = starIcon;
+        stars.append(document.createTextNode(formatStars(t.stars)));
+
+        top.append(fw, stars);
+
+        const h2 = document.createElement("h2");
+        h2.textContent = t.name;
+
+        const p = document.createElement("p");
+        p.textContent = t.description;
+
+        const actions = document.createElement("div");
+        actions.className = "card-actions";
+
+        const deploy = document.createElement("a");
+        deploy.className = "btn btn-primary";
+        deploy.href = deployUrl(t);
+        deploy.target = "_blank";
+        deploy.rel = "noopener noreferrer";
+        deploy.textContent = "Deploy";
+        deploy.setAttribute("aria-label", "Deploy " + t.name + " on DevStack");
+
+        const clone = document.createElement("button");
+        clone.type = "button";
+        clone.className = "btn btn-ghost";
+        clone.textContent = "Clone";
+        clone.setAttribute("aria-label", "Copy git clone command for " + t.name);
+        clone.addEventListener("click", async () => {
+          const cmd = "git clone https://github.com/" + t.repo + ".git";
+          try {
+            await navigator.clipboard.writeText(cmd);
+            clone.textContent = "Copied";
+            clone.dataset.copied = "true";
+            live.textContent = "Copied clone command for " + t.name;
+            setTimeout(() => {
+              clone.textContent = "Clone";
+              delete clone.dataset.copied;
+            }, 1600);
+          } catch {
+            live.textContent = "Copy failed. Command: " + cmd;
+          }
+        });
+
+        const gh = document.createElement("a");
+        gh.className = "icon-link";
+        gh.href = "https://github.com/" + t.repo;
+        gh.target = "_blank";
+        gh.rel = "noopener noreferrer";
+        gh.innerHTML = githubIcon;
+        gh.setAttribute("aria-label", "Open " + t.repo + " on GitHub");
+
+        actions.append(deploy, clone, gh);
+        el.append(top, h2, p, actions);
+        return el;
+      }
+
+      function render() {
+        const list = visible();
+        grid.replaceChildren(...list.map(card));
+        empty.hidden = list.length > 0;
+        document.getElementById("stat-count").textContent = String(TEMPLATES.length);
+        document.getElementById("stat-fw").textContent = String(
+          new Set(TEMPLATES.map((t) => t.framework)).size
+        );
+      }
+
+      searchInput.addEventListener("input", (e) => {
+        state.q = e.target.value;
+        render();
+      });
+
+      sortSelect.addEventListener("change", (e) => {
+        state.sort = e.target.value;
+        render();
+      });
+
+      chips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          state.fw = chip.dataset.fw;
+          chips.forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
+          render();
+        });
+      });
+
+      render();
+    </script>
+  </body>
+</html>
