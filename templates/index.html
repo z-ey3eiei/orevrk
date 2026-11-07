@@ -748,6 +748,7 @@
         {
           name: "Astro",
           repo: "withastro/astro",
+          sourceOnly: true,
           framework: "Astro",
           stars: 63796,
           description:
@@ -756,6 +757,7 @@
         {
           name: "Nuxt",
           repo: "nuxt/nuxt",
+          sourceOnly: true,
           framework: "Nuxt",
           stars: 61048,
           description:
@@ -764,6 +766,7 @@
         {
           name: "SvelteKit",
           repo: "sveltejs/kit",
+          sourceOnly: true,
           framework: "SvelteKit",
           stars: 20903,
           description:
@@ -855,11 +858,11 @@
 
         const deploy = document.createElement("a");
         deploy.className = "btn btn-primary";
-        deploy.href = deployUrl(t);
+        deploy.href = t.sourceOnly ? "https://github.com/" + t.repo : deployUrl(t);
         deploy.target = "_blank";
         deploy.rel = "noopener noreferrer";
-        deploy.textContent = "Deploy";
-        deploy.setAttribute("aria-label", "Deploy " + t.name + " on DevStack");
+        deploy.textContent = t.sourceOnly ? "Source" : "Deploy";
+        deploy.setAttribute("aria-label", t.sourceOnly ? "View " + t.name + " framework source" : "Deploy " + t.name + " on DevStack");
 
         const clone = document.createElement("button");
         clone.type = "button";
